@@ -73,7 +73,7 @@
             did not show above regex to be valid;
             I made some changes below -->
         <label for="email">Email address</label>
-        <input type="email" name="email" title="Please enter a valid email address." pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$" required>
+        <input type="email" name="email" title="Please enter a valid email address." pattern="^[^\.][a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+[^\.]@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$" required>
 
         <button>Submit</button>
       </form>
