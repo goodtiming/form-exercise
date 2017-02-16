@@ -40,6 +40,8 @@
           border: 1px solid black;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="jquery.timepicker.css">
+    <link rel="stylesheet" media="all" type="text/css" href="Intimidatetime.min.css" />
   </head>
 
   <body>
@@ -78,9 +80,58 @@
         <label for="email">Email address</label>
         <input type="email" name="email" title="Please enter a valid email address." pattern="^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+([\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+]*|[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]*)[^\.]@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$" required>
 
-        <button>Submit</button>
+        <br><label for="reservation-date">Reservation Date</label>
+        <input id="reservation-date" type="date" min="2017-02-17" max="2017-04-17" name="reservation-date">
+
+        <br><label for="reservation-time">Reservation Time</label>
+        <input id="reservation-time" type="time" min="06:00:00" max="21:00:00" name="reservation-time">
+
+        <br><button>Submit</button>
       </form>
     </section>
+    <!-- the following is to provide date and time picking where
+          it may not otherwise be presented in Safari, and FireFox -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+
+    <!-- http://api.jqueryui.com/datepicker/ -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- http://jonthornton.github.io/jquery-timepicker/ -->
+    <script src="jquery.timepicker.min.js" type="text/javascript"></script>
+
+    <!-- http://trentrichardson.com/2013/10/28/intimidatetime-a-date-time-picker-for-zepto-and-jquery/
+        this UI is nice, but I don't see a means to limit input
+        dates and times  -->
+    <script src="Intimidatetime.min.js"></script>
+
+    <script type="text/javascript">
+      var dateInput = document.querySelector('#reservation-date');
+      var timeInput = document.querySelector('#reservation-time');
+      if (dateInput.type != 'date') {
+        console.log(dateInput.type);
+        // http://api.jqueryui.com/datepicker/
+        $('#reservation-date').datepicker({
+          minDate: 1, // one day from today
+          maxDate: 60 // 60 days from today
+        });
+        /* this UI is nice, but I don't see a means to limit input
+            dates and times */
+        // $('#reservation-date').intimidatetime();
+      }
+      /* below block is for Jon Thornton timepicker
+          http://jonthornton.github.io/jquery-timepicker/ */
+      if (timeInput.type != 'time') {
+        $('#reservation-time').timepicker({
+          /* first appointment at 6am, last at 9pm */
+          'disableTimeRanges': [
+              ['9:01pm', '11:59pm'],
+              ['12am', '5:59am']
+            ],
+            'step': 15
+        });
+      }
+    </script>
 
   </body>
 
