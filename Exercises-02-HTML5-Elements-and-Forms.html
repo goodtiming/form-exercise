@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      HTML5 Forms Hands-on Exercise #2
+    </title>
+    <!-- Insert meta elements here -->
+    <meta charset="UTF-8">
+    <style type="text/css">
+      header
+        {
+          text-align:center;
+          margin: 0px auto;
+          background: #D61F57;
+          font-family: 'Roboto', sans-serif;
+          color: white;
+          padding: 0.5em;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          width:50%;
+        }
+
+        section
+        {
+          background: #EFF5FB;
+          text-align:center;
+          padding: 10px;
+          border: dashed 2px maroon;
+          font-family: 'Roboto', sans-serif;
+          margin: 0px auto;
+          float: left;
+          width: 100%;
+        }
+
+        table{
+          margin: 0px auto;
+        }
+
+        canvas{
+          border: 1px solid black;
+        }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      Welcome to the 24x7 Fitness Club : Courts Reservation Page!!
+    </header>
+
+    <section>
+      <!-- Create the HTML form here -->
+      <form action="javascript:void(0)">
+
+        <label for="name">Player name</label>
+        <input type="text" name="name" title="Please enter your first and last name (minimum of 2 alphabetic characters each) separated by a space." pattern="^[a-zA-Z]{2,}[ ][a-zA-Z]{2,}$" required>
+
+        <fieldset>
+          <legend>Are you a member?</legend>
+
+          <label for="member">Member</label>
+          <input type="radio" id="member" name="member" required>
+
+          <label for="non-member">Non-member</label>
+          <input type="radio" id="non-member" name="member" required>
+
+        </fieldset>
+
+        <!-- https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation
+        indicates the following regex:
+        var emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        -->
+        <!-- NOTE: https://regex101.com/
+            did not show above regex to be valid;
+            I made some changes below -->
+        <label for="email">Email address</label>
+        <input type="email" name="email" title="Please enter a valid email address." pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$" required>
+
+        <button>Submit</button>
+      </form>
+    </section>
+
+  </body>
+
+</html>
