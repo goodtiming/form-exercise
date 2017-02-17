@@ -75,7 +75,7 @@
       <form action="javascript:void(0)">
 
         <label for="name">Player name</label>
-        <input type="text" name="name" title="Please enter your first and last name (minimum of 2 alphabetic characters each) separated by a space." pattern="^[a-zA-Z]{2,}[ ][a-zA-Z]{2,}$" required>
+        <input type="text" name="name" title="Please enter your first and last name (minimum of 2 alphabetic characters each) separated by a space." pattern="^[a-zA-Z]{2,}[ ][a-zA-Z]{2,}$" required autofocus placeholder="firstname lastname">
 
         <fieldset>
           <legend>Are you a member?</legend>
@@ -98,21 +98,25 @@
         <!-- previous pattern:
           ^[^\.][a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+[^\.]@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$
         -->
+        <!-- previous pattern:
+            "^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+([\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+]*|[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]*)[^\.]@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$"
+        -->
         <label for="email">Email address</label>
-        <input type="email" name="email" title="Please enter a valid email address." pattern="^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+([\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+]*|[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]*)[^\.]@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$" required>
+        <input type="email" name="email" title="Please enter a valid email address." pattern="^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*[^\.]@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$" required>
 
         <br><label for="facility">Facility</label>
         <select id="facility">
-          <option value="badminton">Badminton</option>
-          <option value="squash">Squash</option>
-          <option value="racquetball">Racquetball</option>
+          <option value="" disabled selected>Please select ...</option>
+          <option value="badminton" required>Badminton</option>
+          <option value="squash" required>Squash</option>
+          <option value="racquetball" required>Racquetball</option>
         </select>
 
         <br><label for="reservation-date">Reservation Date</label>
-        <input id="reservation-date" type="date" min="2017-02-17" max="2017-04-17" name="reservation-date">
+        <input id="reservation-date" type="date" min="2017-01-01" max="2017-01-01" title="Reservations accepted from 1-30 days in advance." name="reservation-date" required>
 
         <br><label for="reservation-time">Reservation Time</label>
-        <input id="reservation-time" type="time" min="06:00:00" max="21:00:00" name="reservation-time">
+        <input id="reservation-time" type="time" min="06:00:00" max="21:00:00" title="Please reserve between 6am - 9pm" step="3600" name="reservation-time" required>
 
         <br><button>Submit</button>
       </form>
@@ -135,13 +139,25 @@
 
     <script type="text/javascript">
       var dateInput = document.querySelector('#reservation-date');
+      /* we will set the dateInput min/max attributes programmatically
+          to account for when the page is actually rendered */
+      var today = new Date();
+      var tomorrow = new Date(today.setDate(today.getDate() + 1));
+      var thirtyDaysFromToday = new Date(today.setDate(today.getDate() + 30));
+      var minDate = tomorrow.toISOString().slice(0,tomorrow.toISOString().indexOf('T'));
+      var maxDate = thirtyDaysFromToday.toISOString().slice(0,thirtyDaysFromToday.toISOString().indexOf('T'));
+      dateInput.setAttribute('min', minDate);
+      dateInput.setAttribute('max', maxDate);
+      console.log(dateInput); // check the results of setting attributes
+
       var timeInput = document.querySelector('#reservation-time');
+
       if (dateInput.type != 'date') {
         console.log(dateInput.type);
         // http://api.jqueryui.com/datepicker/
         $('#reservation-date').datepicker({
           minDate: 1, // one day from today
-          maxDate: 60 // 60 days from today
+          maxDate: 30 // 30 days from today
         });
         /* this UI is nice, but I don't see a means to limit input
             dates and times */
@@ -156,7 +172,7 @@
               ['9:01pm', '11:59pm'],
               ['12am', '5:59am']
             ],
-            'step': 15
+            'step': 60
         });
       }
     </script>
