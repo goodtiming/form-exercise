@@ -53,12 +53,19 @@
 
       input,
       select,
-      fieldset {
+      fieldset,
+      button {
         margin: 0.5rem 0 0.5rem 0;
       }
 
       input[type="radio"] {
         margin: 0.5rem 0.5rem 0.5rem 0;
+      }
+
+      button {
+        padding: 0.5rem;
+        border: none;
+        border-radius: 4px;
       }
     </style>
     <link rel="stylesheet" type="text/css" href="jquery.timepicker.css">
@@ -67,7 +74,7 @@
 
   <body>
     <header>
-      Welcome to the 24x7 Fitness Club : <span>Courts Reservation Page!!</span>
+      Welcome to the 16x7 Fitness Club : <span>Courts Reservation Page</span>
     </header>
 
     <section>
@@ -117,6 +124,9 @@
 
         <br><label for="reservation-time">Reservation Time</label>
         <input id="reservation-time" type="time" min="06:00:00" max="21:00:00" title="Please reserve between 6am - 9pm" step="3600" name="reservation-time" required>
+
+        <br><input type="checkbox" name="policy-agree" id="policy-agree" required>
+        <label for="policy-agree">I agree to the club’s reservation policy.</label>
 
         <br><button>Submit</button>
       </form>
