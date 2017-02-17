@@ -6,9 +6,13 @@
     </title>
     <!-- Insert meta elements here -->
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style type="text/css">
-      header
-        {
+      * {
+        box-sizing: border-box;
+      }
+
+      header {
           text-align:center;
           margin: 0px auto;
           background: #D61F57;
@@ -17,28 +21,45 @@
           padding: 0.5em;
           margin-top: 20px;
           margin-bottom: 20px;
-          width:50%;
-        }
+          min-width: 18rem;
+          width:35%;
+      }
 
-        section
-        {
-          background: #EFF5FB;
-          text-align:center;
-          padding: 10px;
-          border: dashed 2px maroon;
-          font-family: 'Roboto', sans-serif;
-          margin: 0px auto;
-          float: left;
-          width: 100%;
-        }
+      header span {
+        white-space: nowrap;
+      }
 
-        table{
-          margin: 0px auto;
-        }
+      section {
+        background: #EFF5FB;
+        /*text-align:center;*/
+        /*text-align: right;*/
+        padding: 1rem;
+        border: dashed 2px maroon;
+        font-family: 'Roboto', sans-serif;
+        margin: 0px auto;
+        /*float: left;*/
+        /*width: 100%;*/
+        min-width: 18rem;
+        width: 35%;
+      }
 
-        canvas{
-          border: 1px solid black;
-        }
+      table {
+        margin: 0px auto;
+      }
+
+      canvas {
+        border: 1px solid black;
+      }
+
+      input,
+      select,
+      fieldset {
+        margin: 0.5rem 0 0.5rem 0;
+      }
+
+      input[type="radio"] {
+        margin: 0.5rem 0.5rem 0.5rem 0;
+      }
     </style>
     <link rel="stylesheet" type="text/css" href="jquery.timepicker.css">
     <link rel="stylesheet" media="all" type="text/css" href="Intimidatetime.min.css" />
@@ -46,7 +67,7 @@
 
   <body>
     <header>
-      Welcome to the 24x7 Fitness Club : Courts Reservation Page!!
+      Welcome to the 24x7 Fitness Club : <span>Courts Reservation Page!!</span>
     </header>
 
     <section>
@@ -79,6 +100,13 @@
         -->
         <label for="email">Email address</label>
         <input type="email" name="email" title="Please enter a valid email address." pattern="^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+([\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+]*|[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]*)[^\.]@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$" required>
+
+        <br><label for="facility">Facility</label>
+        <select id="facility">
+          <option value="badminton">Badminton</option>
+          <option value="squash">Squash</option>
+          <option value="racquetball">Racquetball</option>
+        </select>
 
         <br><label for="reservation-date">Reservation Date</label>
         <input id="reservation-date" type="date" min="2017-02-17" max="2017-04-17" name="reservation-date">
